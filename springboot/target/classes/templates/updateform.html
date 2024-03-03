@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ticket Tracker Application</title>
+    <style>
+		
+		body {
+    font-family: Arial, sans-serif;
+    background-color: #f2f2f2;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #333;
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+}
+
+header a {
+    color: #fff;
+    text-decoration: none;
+    margin: 0 10px;
+}
+
+main {
+    padding: 20px;
+}
+
+ h2 {
+    color: #333;
+}
+
+h1{
+	color:#f2f2f2;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+input[type="text"],
+textarea {
+    padding: 10px;
+    width: calc(100% - 22px); /* Adjusted width */
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+button {
+    padding: 10px 20px;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button[type="submit"] {
+    width: auto;
+}
+
+button[type="submit"]:hover {
+    background-color: #555;
+}
+
+button.actions {
+    padding: 5px 10px;
+    background-color: #fff;
+    color: #333;
+    border: 2px solid #333;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+button.actions:hover {
+    background-color: #eee;
+}
+
+	</style>
+</head>
+<body>
+    <header>
+        <h1>Ticket Tracker Application</h1>
+        <p><a th:href="@{/home}">Ticket</a> | <a th:href="@{/new-ticket}">New Ticket</a></p>
+    </header>
+    <main>
+        <h2>Update Ticket</h2>
+        <form action="update-ticket" method="post">
+            <input type="hidden" name="id" th:value="${ticket.id}"> <!-- Hidden input field for the ticket id -->
+            <div class="form-group">
+                <label for="title">Title:</label>
+                <input type="text" id="title" name="title" th:value="${ticket.title}" required>
+            </div>
+            <div class="form-group">
+                <label for="description">Description:</label>
+                <textarea id="description" name="description" rows="4" required th:text="${ticket.description}"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="content">Content:</label>
+                <textarea id="content" name="content" rows="8" required th:text="${ticket.content}"></textarea>
+            </div>
+            <button type="submit">Update</button>
+        </form>
+    </main>
+</body>
+</html>

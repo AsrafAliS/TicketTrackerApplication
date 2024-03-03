@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ticket Tracker Application</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+
+        header a {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+
+        main {
+            padding: 20px;
+        }
+
+         h2 {
+            color: #333;
+        }
+        
+        h1 {
+			color:#f2f2f2;
+		}
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #fff;
+            border: 1px solid #ccc;
+        }
+
+        th, td {
+            padding: 10px;
+            border: 1px solid #ccc;
+        }
+
+        .search-bar {
+            margin-bottom: 20px;
+        }
+
+        .search-bar input[type="text"] {
+            padding: 10px;
+            width: 200px;
+            border: 1px solid #ccc;
+            border-radius: 0;
+            margin-right: 10px;
+        }
+
+        .search-bar button {
+            padding: 10px 20px;
+            background-color: #333;
+            color: #fff;
+            border: none;
+            border-radius: 0;
+            cursor: pointer;
+        }
+
+        .search-bar button:hover {
+            background-color: #555;
+        }
+
+        tbody tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        td .action-button {
+            padding: 5px 10px;
+            background-color: #333;
+            color: #fff;
+            border: 2px solid #333;
+            border-radius: 0px;
+            text-decoration: none;
+        }
+
+        td .action-button:hover {
+            background-color: #fff;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Ticket Tracker Application</h1>
+        <p><a th:href="@{/home}">Ticket</a> | <a th:href="@{/new-ticket}">New Ticket</a></p>
+    </header>
+    <main>
+        <h2>List of Tickets</h2>
+        <form action="search" method="post">
+            <div class="search-bar">
+                <input type="text" name="query" placeholder="Search...">
+                <button type="submit">Search</button>
+            </div>
+        </form>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Title</th>
+                    <th>Description</th>
+                    <th>Ticket Created on</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="temp: ${ticket}">
+                    <td th:text="${temp.id}">1</td>
+                    <td th:text="${temp.title}">Sample Title</td>
+                    <td th:text="${temp.description}">Sample Description</td>
+                    <td th:text="${temp.date}">2024-03-03</td>
+                    <td>
+                        <a th:href="@{/update(id=${temp.id})}" class="action-button">Update</a>
+                        <a th:href="@{/viewrecord(id=${temp.id})}" class="action-button">View</a>
+                        <a th:href="@{/delete(id=${temp.id})}" class="action-button">Delete</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </main>
+</body>
+</html>
